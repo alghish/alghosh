@@ -1,0 +1,87 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Mohamad Alghosh",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"button_link": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://www.credly.com/users/mohamad-alghish/badges",
+					"target": "_blank",
+					"text": "Credly"
+				}
+			},
+			"button_lable": {
+				"__TYPE__": "FieldContent",
+				"type": "Text",
+				"value": "Credly"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "With 8+ years of enchanting experience, I've conjured code spells for government projects as a Senior Developer, with 5 magical years in the Clouding. My secret potions? Cutting-edge technologies like Microservices, Kubernetes, Machine Learning, and Automation. I'm like Gandalf with a keyboard during coding.",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"image": {
+				"provider": "imgix",
+				"url": "https://images.unsplash.com/photo-1623445535601-217ed68fe0d2?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyM3x8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzMyMTcxMTY3fDA&ixlib=rb-4.0.3&q=85",
+				"alt": "a slice of lemon on a white background",
+				"origin": {
+					"id": "KBBDfpw_MFM",
+					"url": "https://images.unsplash.com/photo-1623445535601-217ed68fe0d2?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyM3x8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzMyMTcxMTY3fDA&ixlib=rb-4.0.3&q=85",
+					"width": 3000,
+					"height": 3000
+				},
+				"width": 3000,
+				"height": 3000,
+				"edit": {
+					"background": "transparent",
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					}
+				},
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"cv_file": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://alghosh.web.app/assets/files/CV_Mhd_Alghosh_2024.pdf",
+					"target": "_blank",
+					"text": "Résumé"
+				}
+			},
+			"cv_lable": {
+				"__TYPE__": "FieldContent",
+				"type": "Text",
+				"value": "Résumé"
+			}
+		},
+		"items": []
+	}
+]
