@@ -15,7 +15,7 @@
 			<span class="sr-only">{settings.data.site_title} home page</span>
 		</a>
 
-		<a href="https://lordicon.com/">Icons by Lordicon.com</a>
+		<a href="">alghish</a>
 
 		<ul class="flex gap-6">
 			{#each settings.data.navigation as item (item.label)}

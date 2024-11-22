@@ -4,7 +4,109 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type PageDocumentDataSlicesSlice = ProjectSlice | HeroSlice | RichTextSlice;
+type CaseStudyDocumentDataSlicesSlice = RichTextSlice;
+
+/**
+ * Content for Case Study documents
+ */
+interface CaseStudyDocumentData {
+	/**
+	 * Heading field in *Case Study*
+	 *
+	 * - **Field Type**: Title
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: case_study.heading
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	heading: prismic.TitleField;
+
+	/**
+	 * Description field in *Case Study*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: case_study.description
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	description: prismic.RichTextField;
+
+	/**
+	 * Image field in *Case Study*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: case_study.image
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	image: prismic.ImageField<never>;
+
+	/**
+	 * Slice Zone field in *Case Study*
+	 *
+	 * - **Field Type**: Slice Zone
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: case_study.slices[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#slices
+	 */
+	slices: prismic.SliceZone<CaseStudyDocumentDataSlicesSlice> /**
+	 * Meta Title field in *Case Study*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A title of the page used for social media and search engines
+	 * - **API ID Path**: case_study.meta_title
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */;
+	meta_title: prismic.KeyTextField;
+
+	/**
+	 * Meta Description field in *Case Study*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A brief summary of the page
+	 * - **API ID Path**: case_study.meta_description
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	meta_description: prismic.KeyTextField;
+
+	/**
+	 * Meta Image field in *Case Study*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: case_study.meta_image
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Case Study document from Prismic
+ *
+ * - **API ID**: `case_study`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CaseStudyDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+	Simplify<CaseStudyDocumentData>,
+	'case_study',
+	Lang
+>;
+
+type PageDocumentDataSlicesSlice =
+	| CertificateSlice
+	| ShowcaseSlice
+	| ProjectSlice
+	| HeroSlice
+	| RichTextSlice;
 
 /**
  * Content for Page documents
@@ -179,7 +281,104 @@ export type SettingsDocument<Lang extends string = string> = prismic.PrismicDocu
 	Lang
 >;
 
-export type AllDocumentTypes = PageDocument | SettingsDocument;
+export type AllDocumentTypes = CaseStudyDocument | PageDocument | SettingsDocument;
+
+/**
+ * Item in *Certificate → Default → Primary → Cert*
+ */
+export interface CertificateSliceDefaultPrimaryCertItem {
+	/**
+	 * Subheading field in *Certificate → Default → Primary → Cert*
+	 *
+	 * - **Field Type**: Title
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: certificate.default.primary.cert[].subheading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	subheading: prismic.TitleField;
+
+	/**
+	 * description field in *Certificate → Default → Primary → Cert*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: certificate.default.primary.cert[].description
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	description: prismic.RichTextField;
+
+	/**
+	 * Image field in *Certificate → Default → Primary → Cert*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: certificate.default.primary.cert[].image
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *Certificate → Default → Primary*
+ */
+export interface CertificateSliceDefaultPrimary {
+	/**
+	 * Heading field in *Certificate → Default → Primary*
+	 *
+	 * - **Field Type**: Title
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: certificate.default.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	heading: prismic.TitleField;
+
+	/**
+	 * Body field in *Certificate → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: certificate.default.primary.body
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	body: prismic.RichTextField;
+
+	/**
+	 * Cert field in *Certificate → Default → Primary*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: certificate.default.primary.cert[]
+	 * - **Documentation**: https://prismic.io/docs/field#group
+	 */
+	cert: prismic.GroupField<Simplify<CertificateSliceDefaultPrimaryCertItem>>;
+}
+
+/**
+ * Default variation for Certificate Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CertificateSliceDefault = prismic.SharedSliceVariation<
+	'default',
+	Simplify<CertificateSliceDefaultPrimary>,
+	never
+>;
+
+/**
+ * Slice variation for *Certificate*
+ */
+type CertificateSliceVariation = CertificateSliceDefault;
+
+/**
+ * Certificate Shared Slice
+ *
+ * - **API ID**: `certificate`
+ * - **Description**: Certificate
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CertificateSlice = prismic.SharedSlice<'certificate', CertificateSliceVariation>;
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -453,6 +652,196 @@ type RichTextSliceVariation = RichTextSliceDefault;
  */
 export type RichTextSlice = prismic.SharedSlice<'rich_text', RichTextSliceVariation>;
 
+/**
+ * Primary content in *Showcase → Default → Primary*
+ */
+export interface ShowcaseSliceDefaultPrimary {
+	/**
+	 * Heading field in *Showcase → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.default.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	heading: prismic.RichTextField;
+
+	/**
+	 * Image field in *Showcase → Default → Primary*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.default.primary.image
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	image: prismic.ImageField<never>;
+
+	/**
+	 * Icon field in *Showcase → Default → Primary*
+	 *
+	 * - **Field Type**: Select
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.default.primary.icon
+	 * - **Documentation**: https://prismic.io/docs/field#select
+	 */
+	icon: prismic.SelectField<'Screen' | 'Monitor'>;
+
+	/**
+	 * Subheading field in *Showcase → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.default.primary.subheading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	subheading: prismic.RichTextField;
+
+	/**
+	 * Body field in *Showcase → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.default.primary.body
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	body: prismic.RichTextField;
+
+	/**
+	 * Button Link field in *Showcase → Default → Primary*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.default.primary.button_link
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	button_link: prismic.LinkField;
+
+	/**
+	 * Button Lable field in *Showcase → Default → Primary*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.default.primary.button_lable
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	button_lable: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Showcase Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ShowcaseSliceDefault = prismic.SharedSliceVariation<
+	'default',
+	Simplify<ShowcaseSliceDefaultPrimary>,
+	never
+>;
+
+/**
+ * Primary content in *Showcase → Reverse → Primary*
+ */
+export interface ShowcaseSliceReversePrimary {
+	/**
+	 * Heading field in *Showcase → Reverse → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.reverse.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	heading: prismic.RichTextField;
+
+	/**
+	 * Image field in *Showcase → Reverse → Primary*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.reverse.primary.image
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	image: prismic.ImageField<never>;
+
+	/**
+	 * Icon field in *Showcase → Reverse → Primary*
+	 *
+	 * - **Field Type**: Select
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.reverse.primary.icon
+	 * - **Documentation**: https://prismic.io/docs/field#select
+	 */
+	icon: prismic.SelectField<'Screen' | 'Monitor'>;
+
+	/**
+	 * Subheading field in *Showcase → Reverse → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.reverse.primary.subheading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	subheading: prismic.RichTextField;
+
+	/**
+	 * Body field in *Showcase → Reverse → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.reverse.primary.body
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	body: prismic.RichTextField;
+
+	/**
+	 * Button Link field in *Showcase → Reverse → Primary*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.reverse.primary.button_link
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	button_link: prismic.LinkField;
+
+	/**
+	 * Button Lable field in *Showcase → Reverse → Primary*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcase.reverse.primary.button_lable
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	button_lable: prismic.KeyTextField;
+}
+
+/**
+ * Reverse variation for Showcase Slice
+ *
+ * - **API ID**: `reverse`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ShowcaseSliceReverse = prismic.SharedSliceVariation<
+	'reverse',
+	Simplify<ShowcaseSliceReversePrimary>,
+	never
+>;
+
+/**
+ * Slice variation for *Showcase*
+ */
+type ShowcaseSliceVariation = ShowcaseSliceDefault | ShowcaseSliceReverse;
+
+/**
+ * Showcase Shared Slice
+ *
+ * - **API ID**: `showcase`
+ * - **Description**: Showcase
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ShowcaseSlice = prismic.SharedSlice<'showcase', ShowcaseSliceVariation>;
+
 declare module '@prismicio/client' {
 	interface CreateClient {
 		(
@@ -474,6 +863,9 @@ declare module '@prismicio/client' {
 
 	namespace Content {
 		export type {
+			CaseStudyDocument,
+			CaseStudyDocumentData,
+			CaseStudyDocumentDataSlicesSlice,
 			PageDocument,
 			PageDocumentData,
 			PageDocumentDataSlicesSlice,
@@ -481,6 +873,11 @@ declare module '@prismicio/client' {
 			SettingsDocumentData,
 			SettingsDocumentDataNavigationItem,
 			AllDocumentTypes,
+			CertificateSlice,
+			CertificateSliceDefaultPrimaryCertItem,
+			CertificateSliceDefaultPrimary,
+			CertificateSliceVariation,
+			CertificateSliceDefault,
 			HeroSlice,
 			HeroSliceDefaultPrimary,
 			HeroSliceVariation,
@@ -493,7 +890,13 @@ declare module '@prismicio/client' {
 			RichTextSlice,
 			RichTextSliceDefaultPrimary,
 			RichTextSliceVariation,
-			RichTextSliceDefault
+			RichTextSliceDefault,
+			ShowcaseSlice,
+			ShowcaseSliceDefaultPrimary,
+			ShowcaseSliceReversePrimary,
+			ShowcaseSliceVariation,
+			ShowcaseSliceDefault,
+			ShowcaseSliceReverse
 		};
 	}
 }

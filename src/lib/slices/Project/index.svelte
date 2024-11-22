@@ -28,17 +28,17 @@
 					item.wide ? 'md:col-span-2' : 'md:col-span-1'
 				)}
 			>
+				<PrismicImage field={item.image} class=" m-auto max-h-36 w-auto rounded-lg" />
+
 				<h3 class="text-2xl">
 					<PrismicText field={item.title} />
 				</h3>
 
-				<div class="max-w-md text-balance text-gray-300">
+				<div class="max-w-fit text-pretty text-gray-300">
 					<PrismicRichText field={item.body} components={{ em: GoldText }} />
 				</div>
 
-				<PrismicImage field={item.image} class="max-h-36 w-auto" />
-
-				<ButtonLink class="mt-8" field={item.web_link}>
+				<ButtonLink class="mt-2" field={item.web_link}>
 					{item.web_lable}
 				</ButtonLink>
 			</div>

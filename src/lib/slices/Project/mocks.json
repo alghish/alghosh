@@ -132,7 +132,7 @@
 										{
 											"type": "heading3",
 											"content": {
-												"text": "Tow",
+												"text": "Log Reader Tool",
 												"spans": []
 											},
 											"direction": "ltr"
@@ -148,7 +148,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Aliqua reprehenderit excepteur occaecat sint esse fugiat elit laborum et enim eu ad laborum. Ad nulla occaecat deserunt qui.",
+												"text": "A versatile and user-friendly Windows application designed to analyze logs from local machines or remote URLs. The tool specializes in identifying and summarizing the most frequently occurring errors within specified time ranges. Key features include interactive visualizations such as bar and pie charts for error distribution, customizable settings for tailored log parsing, and a clean, intuitive interface. Ideal for developers and IT professionals seeking efficient log analysis and troubleshooting capabilities.",
 												"spans": []
 											},
 											"direction": "ltr"
