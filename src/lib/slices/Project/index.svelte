@@ -44,4 +44,10 @@
 			</div>
 		{/each}
 	</div>
+
+	{#if slice.primary.label}
+		<ButtonLink class="mt-8" field={slice.primary.projects_page}>
+			{slice.primary.label}
+		</ButtonLink>
+	{/if}
 </Bounded>

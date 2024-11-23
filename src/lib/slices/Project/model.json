@@ -30,6 +30,23 @@
             "multi": "paragraph,em"
           }
         },
+        "projects_page": {
+          "type": "Link",
+          "config": {
+            "label": "Projects Page",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "select": null,
+            "allowText": true
+          }
+        },
+        "label": {
+          "type": "Text",
+          "config": {
+            "label": "Label",
+            "placeholder": ""
+          }
+        },
         "items": {
           "type": "Group",
           "config": {

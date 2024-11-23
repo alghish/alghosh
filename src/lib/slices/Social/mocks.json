@@ -29,6 +29,17 @@
 									"value": "twitter",
 									"type": "Select"
 								}
+							],
+							[
+								"social_link",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://twitter.com",
+										"text": "blew"
+									}
+								}
 							]
 						]
 					},
@@ -41,6 +52,17 @@
 									"__TYPE__": "FieldContent",
 									"type": "Select",
 									"value": "linkedin"
+								}
+							],
+							[
+								"social_link",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "add"
+									}
 								}
 							]
 						]
@@ -55,6 +77,17 @@
 									"type": "Select",
 									"value": "email"
 								}
+							],
+							[
+								"social_link",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "exclaimed"
+									}
+								}
 							]
 						]
 					},
@@ -67,6 +100,17 @@
 									"__TYPE__": "FieldContent",
 									"type": "Select",
 									"value": "github"
+								}
+							],
+							[
+								"social_link",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "https://slicemachine.dev",
+										"text": "neck"
+									}
 								}
 							]
 						]

@@ -1,14 +1,15 @@
 <script lang="ts">
 	import Bounded from '$lib/components/Bounded.svelte';
 	import type { Content } from '@prismicio/client';
-	import { PrismicText, PrismicRichText } from '@prismicio/svelte';
+	import { PrismicText, PrismicRichText, PrismicLink } from '@prismicio/svelte';
 
 	import background from './background.jpg';
 
 	import IconGithub from '~icons/fa-brands/github-alt';
 	import IconLinkedin from '~icons/fa-brands/linkedin';
-	import IconTwitter from '~icons/fa-brands/twitter-square';
+	// import IconTwitter from '~icons/fa-brands/twitter-square';
 	import IconEmail from '~icons/ph/envelope-bold';
+	import IconTwitter from '~icons/ph/x-logo-fill';
 
 	const icons = {
 		github: IconGithub,
@@ -41,14 +42,16 @@
 
 		<div class="mt-20 flex flex-col items-center md:flex-row">
 			{#each slice.primary.social_icons as item, index}
-				<div
-					class="pulsing-icon flex aspect-square shrink-0 items-center justify-center rounded-full border border-violet-50/30 bg-violet-50/25 p-3 text-3xl text-violet-100 opacity-40 md:text-3xl lg:text-5xl"
-				>
-					{#if item.icons}
-						<svelte:component this={icons[item.icons]} />
-					{/if}
-				</div>
-				<!-- Render content for item -->
+				<PrismicLink field={item.social_link}>
+					<div
+						class="pulsing-icon flex aspect-square shrink-0 items-center justify-center rounded-full border border-violet-50/30 bg-violet-50/25 p-3 text-3xl text-violet-100 opacity-40 md:text-3xl lg:text-5xl"
+					>
+						{#if item.icons}
+							<svelte:component this={icons[item.icons]} />
+						{/if}
+					</div>
+					<!-- Render content for item -->
+				</PrismicLink>
 
 				{#if index != slice.primary.social_icons.length - 1}
 					<div class="signal-line"></div>

@@ -574,6 +574,26 @@ export interface ProjectSliceDefaultPrimary {
 	body: prismic.RichTextField;
 
 	/**
+	 * Projects Page field in *Project → Default → Primary*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: project.default.primary.projects_page
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	projects_page: prismic.LinkField;
+
+	/**
+	 * Label field in *Project → Default → Primary*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: project.default.primary.label
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	label: prismic.KeyTextField;
+
+	/**
 	 * Items field in *Project → Default → Primary*
 	 *
 	 * - **Field Type**: Group
@@ -856,6 +876,16 @@ export interface SocialSliceDefaultPrimarySocialIconsItem {
 	 * - **Documentation**: https://prismic.io/docs/field#select
 	 */
 	icons: prismic.SelectField<'email' | 'github' | 'linkedin' | 'twitter'>;
+
+	/**
+	 * Social Link field in *Social → Default → Primary → Social Icons*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: social.default.primary.social_icons[].social_link
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	social_link: prismic.LinkField;
 }
 
 /**

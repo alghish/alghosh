@@ -48,6 +48,16 @@
                     "twitter"
                   ]
                 }
+              },
+              "social_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Social Link",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "select": null,
+                  "allowText": true
+                }
               }
             }
           }
