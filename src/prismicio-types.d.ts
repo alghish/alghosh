@@ -102,6 +102,7 @@ export type CaseStudyDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 type PageDocumentDataSlicesSlice =
+	| SocialSlice
 	| CertificateSlice
 	| ShowcaseSlice
 	| ProjectSlice
@@ -842,6 +843,83 @@ type ShowcaseSliceVariation = ShowcaseSliceDefault | ShowcaseSliceReverse;
  */
 export type ShowcaseSlice = prismic.SharedSlice<'showcase', ShowcaseSliceVariation>;
 
+/**
+ * Item in *Social → Default → Primary → Social Icons*
+ */
+export interface SocialSliceDefaultPrimarySocialIconsItem {
+	/**
+	 * Icons field in *Social → Default → Primary → Social Icons*
+	 *
+	 * - **Field Type**: Select
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: social.default.primary.social_icons[].icons
+	 * - **Documentation**: https://prismic.io/docs/field#select
+	 */
+	icons: prismic.SelectField<'email' | 'github' | 'linkedin' | 'twitter'>;
+}
+
+/**
+ * Primary content in *Social → Default → Primary*
+ */
+export interface SocialSliceDefaultPrimary {
+	/**
+	 * Heading field in *Social → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: social.default.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	heading: prismic.RichTextField;
+
+	/**
+	 * Body field in *Social → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: social.default.primary.body
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	body: prismic.RichTextField;
+
+	/**
+	 * Social Icons field in *Social → Default → Primary*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: social.default.primary.social_icons[]
+	 * - **Documentation**: https://prismic.io/docs/field#group
+	 */
+	social_icons: prismic.GroupField<Simplify<SocialSliceDefaultPrimarySocialIconsItem>>;
+}
+
+/**
+ * Default variation for Social Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SocialSliceDefault = prismic.SharedSliceVariation<
+	'default',
+	Simplify<SocialSliceDefaultPrimary>,
+	never
+>;
+
+/**
+ * Slice variation for *Social*
+ */
+type SocialSliceVariation = SocialSliceDefault;
+
+/**
+ * Social Shared Slice
+ *
+ * - **API ID**: `social`
+ * - **Description**: Social
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SocialSlice = prismic.SharedSlice<'social', SocialSliceVariation>;
+
 declare module '@prismicio/client' {
 	interface CreateClient {
 		(
@@ -896,7 +974,12 @@ declare module '@prismicio/client' {
 			ShowcaseSliceReversePrimary,
 			ShowcaseSliceVariation,
 			ShowcaseSliceDefault,
-			ShowcaseSliceReverse
+			ShowcaseSliceReverse,
+			SocialSlice,
+			SocialSliceDefaultPrimarySocialIconsItem,
+			SocialSliceDefaultPrimary,
+			SocialSliceVariation,
+			SocialSliceDefault
 		};
 	}
 }

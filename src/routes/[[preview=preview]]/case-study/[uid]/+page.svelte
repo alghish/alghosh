@@ -6,7 +6,6 @@
 	import TriangleGrid from '$lib/components/TriangleGrid.svelte';
 
 	export let data;
-	console.log('🚀 ~ data:', data);
 </script>
 
 <Bounded>

@@ -14,6 +14,7 @@
 		"slicemachine": "start-slicemachine"
 	},
 	"devDependencies": {
+		"@iconify-json/fa-brands": "^1.2.0",
 		"@iconify-json/ph": "^1.2.1",
 		"@slicemachine/adapter-sveltekit": "^0.3.57",
 		"@sveltejs/adapter-auto": "^3.2.2",
