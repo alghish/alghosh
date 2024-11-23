@@ -5,7 +5,6 @@
 	import clsx from 'clsx';
 
 	export let slice: Content.CertificateSlice;
-	console.log('🚀 ~ slice:', slice);
 </script>
 
 <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
@@ -18,11 +17,13 @@
 
 	<dev class="mt-20 grid gap-16">
 		{#each slice.primary.cert as item, index}
-			<!-- Render content for item -->
+			<!-- Render content for item 
+			
+			-->
 			<div
-				class="group relative grid gap-4 opacity-85 transition-opacity duration-300 hover:cursor-pointer hover:opacity-100 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
+				class="group relative grid grid-cols-2 gap-4 opacity-85 transition-opacity duration-300 hover:cursor-pointer hover:opacity-100"
 			>
-				<div class="col-span-1 flex flex-col justify-center gap-4">
+				<div class="col-span-1 m-auto flex flex-col justify-center gap-4">
 					<h3 class="text-4xl">
 						<PrismicText field={item.subheading} />
 					</h3>
@@ -30,15 +31,18 @@
 						<PrismicRichText field={item.description} />
 					</div>
 				</div>
-				<div class={clsx('relative lg:col-span-2', index % 2 && 'md:-order-1')}>
+				<!--  -->
+				<div class={clsx('relative col-span-1 m-auto', index % 2 && '-order-1')}>
+					<!-- <div> -->
 					<div class="image-glow -bottom-8 -left-4 bg-orange-500"></div>
-					<div class="image-glow -right-4 -top-8 bg-violet-500"></div>
+					<div class="image-glow -left-4 -top-4 bg-violet-500"></div>
 
+					<!-- sizes="(max-width: 768px) 100vw, 50vw" -->
 					<PrismicImage
 						field={item.image}
-						sizes="(max-width: 768px) 100vw, 50vw"
-						class="z-20 scale-[.98] rounded-xl transition-transform duration-300 group-hover:scale-100"
+						class="z-20 max-w-56 scale-[.98] rounded-xl transition-transform duration-300 group-hover:scale-100"
 					/>
+					<!-- </div> -->
 				</div>
 			</div>
 		{/each}

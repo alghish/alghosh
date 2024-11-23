@@ -48,9 +48,20 @@
 				<PrismicRichText field={slice.primary.body} />
 			</div>
 
-			<ButtonLink field={slice.primary.button_link} class="mt-6">
-				{slice.primary.button_lable || 'Lean more'}
-			</ButtonLink>
+			{#if slice.primary.button_link}
+				<ButtonLink field={slice.primary.button_link} class="mt-6">
+					{slice.primary.button_lable || 'Lean more'}
+				</ButtonLink>
+			{/if}
+
+			{#if slice.primary.to_case_study}
+				<ButtonLink field={slice.primary.to_case_study} class="mt-6">
+					{slice.primary.button_lable || 'Lean more'}
+				</ButtonLink>
+				<!-- <PrismicLink field={slice.primary.to_case_study}>
+					{slice.primary.button_lable || 'Lean more'}
+				</PrismicLink> -->
+			{/if}
 		</div>
 
 		<PrismicImage
