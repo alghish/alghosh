@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import gsap from 'gsap';
 	import Bounded from '$lib/components/Bounded.svelte';
 	import type { Content } from '@prismicio/client';
 	import { PrismicText, PrismicRichText, PrismicLink } from '@prismicio/svelte';
@@ -20,6 +22,59 @@
 	};
 
 	export let slice: Content.SocialSlice;
+
+	//
+	onMount(() => {
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce').matches;
+
+		if (prefersReducedMotion) return;
+
+		const tl = gsap.timeline({
+			repeat: -1,
+			defaults: { ease: 'power2.inOut' }
+		});
+
+		tl.to(
+			'.signal-line',
+			{
+				keyframes: [
+					{ backgroundPosition: '0% 0%' },
+					{
+						backgroundPosition: '100% 100%',
+						stagger: { from: 'center', each: 0.3 },
+						duration: 1
+					}
+				]
+			},
+			'-=1.4'
+		);
+
+		tl.to(
+			'.pulsing-icon',
+			{
+				keyframes: [
+					{
+						opacity: 1,
+						duration: 1,
+						stagger: {
+							from: 'center',
+							each: 0.3
+						}
+					},
+					{
+						opacity: 0.4,
+						duration: 1,
+						stagger: {
+							from: 'center',
+							each: 0.3
+						}
+					}
+				]
+			},
+			'-=2'
+		);
+	});
+	//
 </script>
 
 <Bounded

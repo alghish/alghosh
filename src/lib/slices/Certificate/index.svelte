@@ -21,7 +21,7 @@
 			
 			-->
 			<div
-				class="group relative grid grid-cols-2 gap-4 opacity-85 transition-opacity duration-300 hover:cursor-pointer hover:opacity-100"
+				class="group relative grid gap-4 opacity-85 transition-opacity duration-300 hover:cursor-pointer hover:opacity-100 md:grid-cols-2"
 			>
 				<div class="col-span-1 m-auto flex flex-col justify-center gap-4">
 					<h3 class="text-4xl">
