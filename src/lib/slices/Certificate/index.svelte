@@ -38,10 +38,12 @@
 					<div class="image-glow -left-4 -top-4 bg-violet-500"></div>
 
 					<!-- sizes="(max-width: 768px) 100vw, 50vw" -->
-					<PrismicImage
-						field={item.image}
-						class="z-20 max-w-56 scale-[.98] rounded-xl transition-transform duration-300 group-hover:scale-100"
-					/>
+					<a data-fancybox="gallery" href={item.image.url} data-caption={item.image.alt || 'Image'}>
+						<PrismicImage
+							field={item.image}
+							class="z-20 max-w-72 scale-[.98] rounded-xl transition-transform duration-300 group-hover:scale-100"
+						/>
+					</a>
 					<!-- </div> -->
 				</div>
 			</div>
