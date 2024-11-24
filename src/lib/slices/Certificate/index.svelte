@@ -32,7 +32,7 @@
 					</div>
 				</div>
 				<!--  -->
-				<div class={clsx('relative col-span-1 m-auto', index % 2 && '-order-1')}>
+				<div class={clsx('relative col-span-1 m-auto', index % 2 && 'md:-order-1')}>
 					<!-- <div> -->
 					<div class="image-glow -bottom-8 -left-4 bg-orange-500"></div>
 					<div class="image-glow -left-4 -top-4 bg-violet-500"></div>
