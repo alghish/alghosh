@@ -14,6 +14,8 @@
 
 	export let slice: Content.ShowcaseSlice;
 
+	console.log('Slice data:', slice);
+
 	onMount(() => {
 		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce').matches;
 
@@ -75,53 +77,53 @@
 		</h2>
 	{/if}
 
-	<div
-		class="relative mt-16 grid items-center gap-8 rounded-xl border border-violet-50/20 bg-gradient-to-b from-gray-50/15 to-gray-50/15 px-8 py-8 backdrop-blur-sm lg:grid-cols-3"
-	>
-		<div class="grid-background"></div>
+	<div>
+		{#each slice.primary.items as item}
+			<div
+				class="relative mt-16 grid items-center gap-8 rounded-xl border border-violet-50/20 bg-gradient-to-b from-gray-50/15 to-gray-50/15 px-8 py-8 backdrop-blur-sm lg:grid-cols-3"
+			>
+				<div class="grid-background"></div>
 
-		<div>
-			{#if slice.primary.icon}
-				<div class="w-fit rounded-lg bg-violet-800 p-4 text-3xl">
-					<svelte:component this={icons[slice.primary.icon]} />
-					<!-- {slice.primary.icon} -->
+				<div>
+					{#if item.icon}
+						<div class="w-fit rounded-lg bg-violet-800 p-4 text-3xl">
+							<svelte:component this={icons[item.icon]} />
+							<!-- {slice.primary.icon} -->
+						</div>
+					{/if}
+
+					<h3 class="mt-6 text-2xl font-normal">
+						<PrismicText field={item.subheading} />
+					</h3>
+
+					<div class="prose prose-invert mt-4">
+						<PrismicRichText field={item.body} />
+					</div>
+
+					{#if item.button_link}
+						<ButtonLink field={item.button_link} class="mt-6">
+							{item.button_lable || 'Lean more'}
+						</ButtonLink>
+					{/if}
+
+					<!-- {#if slice.primary.to_case_study}
+					<ButtonLink field={slice.primary.to_case_study} class="mt-6">
+						{slice.primary.button_lable || 'Lean more'}
+					</ButtonLink>
+				{/if} -->
 				</div>
-			{/if}
 
-			<h3 class="mt-6 text-2xl font-normal">
-				<PrismicText field={slice.primary.subheading} />
-			</h3>
-
-			<div class="prose prose-invert mt-4">
-				<PrismicRichText field={slice.primary.body} />
+				<PrismicImage
+					field={item.image}
+					class={clsx(
+						'opacity-90 shadow-2xl lg:col-span-2 lg:pt-0',
+						item.reverse ? 'lg:order-1 lg:translate-x-[15%]' : 'lg:-order-1 lg:translate-x-[-15%]'
+					)}
+					sizes="(max-width: 768px) 100vw, 50vw"
+				/>
 			</div>
-
-			{#if slice.primary.button_link}
-				<ButtonLink field={slice.primary.button_link} class="mt-6">
-					{slice.primary.button_lable || 'Lean more'}
-				</ButtonLink>
-			{/if}
-
-			{#if slice.primary.to_case_study}
-				<ButtonLink field={slice.primary.to_case_study} class="mt-6">
-					{slice.primary.button_lable || 'Lean more'}
-				</ButtonLink>
-				<!-- <PrismicLink field={slice.primary.to_case_study}>
-					{slice.primary.button_lable || 'Lean more'}
-				</PrismicLink> -->
-			{/if}
-		</div>
-
-		<PrismicImage
-			field={slice.primary.image}
-			class={clsx(
-				'opacity-90 shadow-2xl lg:col-span-2 lg:pt-0',
-				slice.variation === 'reverse'
-					? 'lg:order-1 lg:translate-x-[15%]'
-					: 'lg:-order-1 lg:translate-x-[-15%]'
-			)}
-			sizes="(max-width: 768px) 100vw, 50vw"
-		/>
+			<!-- Render content for item -->
+		{/each}
 	</div>
 </Bounded>
 
