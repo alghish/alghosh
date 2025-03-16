@@ -802,6 +802,113 @@ type ShowcaseSliceVariation = ShowcaseSliceDefault;
 export type ShowcaseSlice = prismic.SharedSlice<'showcase', ShowcaseSliceVariation>;
 
 /**
+ * Item in *Scs → Default → Primary → Items*
+ */
+export interface ShowcasesSliceDefaultPrimaryItemsItem {
+	/**
+	 * Subheading field in *Scs → Default → Primary → Items*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcases.default.primary.items[].subheading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	subheading: prismic.RichTextField;
+
+	/**
+	 * Image field in *Scs → Default → Primary → Items*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcases.default.primary.items[].image
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	image: prismic.ImageField<never>;
+
+	/**
+	 * Body field in *Scs → Default → Primary → Items*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcases.default.primary.items[].body
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	body: prismic.RichTextField;
+
+	/**
+	 * Button Link field in *Scs → Default → Primary → Items*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcases.default.primary.items[].button_link
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	button_link: prismic.LinkField;
+
+	/**
+	 * Button Lable field in *Scs → Default → Primary → Items*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcases.default.primary.items[].button_lable
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	button_lable: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *Scs → Default → Primary*
+ */
+export interface ShowcasesSliceDefaultPrimary {
+	/**
+	 * Heading field in *Scs → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcases.default.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	heading: prismic.RichTextField;
+
+	/**
+	 * Items field in *Scs → Default → Primary*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: showcases.default.primary.items[]
+	 * - **Documentation**: https://prismic.io/docs/field#group
+	 */
+	items: prismic.GroupField<Simplify<ShowcasesSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for Scs Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ShowcasesSliceDefault = prismic.SharedSliceVariation<
+	'default',
+	Simplify<ShowcasesSliceDefaultPrimary>,
+	never
+>;
+
+/**
+ * Slice variation for *Scs*
+ */
+type ShowcasesSliceVariation = ShowcasesSliceDefault;
+
+/**
+ * Scs Shared Slice
+ *
+ * - **API ID**: `showcases`
+ * - **Description**: Showcases
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ShowcasesSlice = prismic.SharedSlice<'showcases', ShowcasesSliceVariation>;
+
+/**
  * Item in *Social → Default → Primary → Social Icons*
  */
 export interface SocialSliceDefaultPrimarySocialIconsItem {
@@ -942,6 +1049,11 @@ declare module '@prismicio/client' {
 			ShowcaseSliceDefaultPrimary,
 			ShowcaseSliceVariation,
 			ShowcaseSliceDefault,
+			ShowcasesSlice,
+			ShowcasesSliceDefaultPrimaryItemsItem,
+			ShowcasesSliceDefaultPrimary,
+			ShowcasesSliceVariation,
+			ShowcasesSliceDefault,
 			SocialSlice,
 			SocialSliceDefaultPrimarySocialIconsItem,
 			SocialSliceDefaultPrimary,

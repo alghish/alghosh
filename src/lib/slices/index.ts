@@ -5,6 +5,7 @@ import Hero from './Hero/index.svelte';
 import Project from './Project/index.svelte';
 import RichText from './RichText/index.svelte';
 import Showcase from './Showcase/index.svelte';
+import Scs from './Scs/index.svelte';
 import Social from './Social/index.svelte';
 
 export const components = {
@@ -13,5 +14,6 @@ export const components = {
 	project: Project,
 	rich_text: RichText,
 	showcase: Showcase,
+	showcases: Scs,
 	social: Social
 };
