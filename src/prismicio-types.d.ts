@@ -102,6 +102,8 @@ export type CaseStudyDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 type PageDocumentDataSlicesSlice =
+	| CourseSlice
+	| ShowcasesSlice
 	| SocialSlice
 	| CertificateSlice
 	| ShowcaseSlice
@@ -380,6 +382,113 @@ type CertificateSliceVariation = CertificateSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type CertificateSlice = prismic.SharedSlice<'certificate', CertificateSliceVariation>;
+
+/**
+ * Item in *Course → Default → Primary → Course*
+ */
+export interface CourseSliceDefaultPrimaryCourseItem {
+	/**
+	 * Subheading field in *Course → Default → Primary → Course*
+	 *
+	 * - **Field Type**: Title
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: course.default.primary.course[].subheading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	subheading: prismic.TitleField;
+
+	/**
+	 * description field in *Course → Default → Primary → Course*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: course.default.primary.course[].description
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	description: prismic.RichTextField;
+
+	/**
+	 * courseDate field in *Course → Default → Primary → Course*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: course.default.primary.course[].coursedate
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	coursedate: prismic.RichTextField;
+
+	/**
+	 * Image field in *Course → Default → Primary → Course*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: course.default.primary.course[].image
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	image: prismic.ImageField<never>;
+
+	/**
+	 * Link field in *Course → Default → Primary → Course*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: course.default.primary.course[].link
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	link: prismic.LinkField;
+}
+
+/**
+ * Primary content in *Course → Default → Primary*
+ */
+export interface CourseSliceDefaultPrimary {
+	/**
+	 * Heading field in *Course → Default → Primary*
+	 *
+	 * - **Field Type**: Title
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: course.default.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	heading: prismic.TitleField;
+
+	/**
+	 * Course field in *Course → Default → Primary*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: course.default.primary.course[]
+	 * - **Documentation**: https://prismic.io/docs/field#group
+	 */
+	course: prismic.GroupField<Simplify<CourseSliceDefaultPrimaryCourseItem>>;
+}
+
+/**
+ * Default variation for Course Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CourseSliceDefault = prismic.SharedSliceVariation<
+	'default',
+	Simplify<CourseSliceDefaultPrimary>,
+	never
+>;
+
+/**
+ * Slice variation for *Course*
+ */
+type CourseSliceVariation = CourseSliceDefault;
+
+/**
+ * Course Shared Slice
+ *
+ * - **API ID**: `course`
+ * - **Description**: Course
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CourseSlice = prismic.SharedSlice<'course', CourseSliceVariation>;
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -1031,6 +1140,11 @@ declare module '@prismicio/client' {
 			CertificateSliceDefaultPrimary,
 			CertificateSliceVariation,
 			CertificateSliceDefault,
+			CourseSlice,
+			CourseSliceDefaultPrimaryCourseItem,
+			CourseSliceDefaultPrimary,
+			CourseSliceVariation,
+			CourseSliceDefault,
 			HeroSlice,
 			HeroSliceDefaultPrimary,
 			HeroSliceVariation,

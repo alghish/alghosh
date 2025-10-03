@@ -27,6 +27,12 @@
 				"fieldset": "Slice Zone",
 				"config": {
 					"choices": {
+						"course": {
+							"type": "SharedSlice"
+						},
+						"showcases": {
+							"type": "SharedSlice"
+						},
 						"social": {
 							"type": "SharedSlice"
 						},

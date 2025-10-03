@@ -24,12 +24,13 @@
 			}
 		});
 
+    
+		t1.fromTo('.hero__image', { y: 100 }, { y: 0, opacity: 1, duration: 0.5 }, '+=0.3');
 		t1.fromTo('.hero__heading', { scale: 0.5 }, { scale: 1, opacity: 1, duration: 1.4 });
 
 		t1.fromTo('.hero__body', { y: 20 }, { y: 0, opacity: 1, duration: 1.2 }, '-=0.6');
 
 		t1.fromTo('.hero__button', { scale: 1.5 }, { scale: 1, opacity: 1, duration: 1.3 }, '-=0.8');
-		t1.fromTo('.hero__image', { y: 100 }, { y: 0, opacity: 1, duration: 1.3 }, '+=0.3');
 		t1.fromTo('.hero__glow', { scale: 0.5 }, { scale: 1, opacity: 1, duration: 1.2 }, '-=1');
 
 		gsap.to('.hero__glow__one', {
