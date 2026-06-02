@@ -14,32 +14,31 @@
   <div class="course-grid">
     {#each slice.primary.course as item}
       <div class="course-card group">
-        <!-- Image -->
         <div class="card-image-wrap">
           <div class="glow glow-orange"></div>
           <div class="glow glow-violet"></div>
           <a data-fancybox="gallery" href={item.image.url} data-caption={item.image.alt || 'Image'}>
             <PrismicImage
               field={item.image}
-              class="card-image z-20 rounded-xl scale-[.98] transition-transform duration-300 group-hover:scale-100"
+              class="card-image rounded-xl scale-[.98] transition-transform duration-300 group-hover:scale-100"
             />
           </a>
         </div>
 
-        <!-- Content -->
-        <div class="card-body">
-          <h3 class="card-title">
-            <PrismicText field={item.subheading} />
-          </h3>
-          <div class="card-date">
-            <PrismicRichText field={item.coursedate} />
-          </div>
-          <div class="card-desc">
-            <PrismicRichText field={item.description} />
-          </div>
-          <ButtonLink field={item.link} class="mt-auto">
-            Course Link
-          </ButtonLink>
+        <h3 class="card-title">
+          <PrismicText field={item.subheading} />
+        </h3>
+
+        <div class="card-date">
+          <PrismicRichText field={item.coursedate} />
+        </div>
+
+        <div class="card-desc">
+          <PrismicRichText field={item.description} />
+        </div>
+
+        <div class="card-action">
+          <ButtonLink field={item.link}>Course Link</ButtonLink>
         </div>
       </div>
     {/each}
@@ -47,63 +46,55 @@
 </Bounded>
 
 <style>
-  /* Grid: 3 columns, single item centers */
+  /* ── Outer grid ── */
   .course-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    justify-items: center;
+    /* 5 row tracks: image | title | date | desc | button */
+    grid-template-rows: auto;
+    gap: 2rem 1.5rem;
+    align-items: start;
   }
 
-  /* When fewer than 3 items, center them */
-  .course-grid:has(.course-card:only-child),
+  /* Center when fewer than 3 cards */
   .course-grid:has(.course-card:nth-child(1):nth-last-child(1)) {
     grid-template-columns: minmax(0, 380px);
     justify-content: center;
   }
-
   .course-grid:has(.course-card:nth-child(1):nth-last-child(2)) {
     grid-template-columns: repeat(2, minmax(0, 380px));
     justify-content: center;
   }
 
   @media (max-width: 1024px) {
-    .course-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    .course-grid { grid-template-columns: repeat(2, 1fr); }
   }
-
   @media (max-width: 640px) {
-    .course-grid {
-      grid-template-columns: 1fr;
-    }
+    .course-grid { grid-template-columns: 1fr; }
   }
 
-  /* Card */
+  /* ── Card: subgrid across 5 row tracks ── */
   .course-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 380px;
+    display: grid;
+    /* Each card spans 5 rows and uses subgrid so all cards share the same row heights */
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    align-items: start;
+
+    text-align: center;
     opacity: 0.88;
     transition: opacity 0.3s ease;
     cursor: pointer;
   }
+  .course-card:hover { opacity: 1; }
 
-  .course-card:hover {
-    opacity: 1;
-  }
-
-  /* Image wrapper with glow effects */
+  /* ── Image ── */
   .card-image-wrap {
     position: relative;
-    width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 1.25rem;
+    width: 100%;
   }
-
   .card-image-wrap :global(.card-image) {
     width: 100%;
     max-width: 280px;
@@ -115,34 +106,28 @@
   .glow {
     @apply absolute h-1/2 w-1/2 rounded-full opacity-30 mix-blend-screen blur-3xl transition-opacity duration-500 group-hover:opacity-50;
   }
+  .glow-orange { @apply bg-orange-500 -bottom-4 -left-2; }
+  .glow-violet { @apply bg-violet-500 -top-4 -left-2; }
 
-  .glow-orange {
-    @apply bg-orange-500 -bottom-4 -left-2;
-  }
-
-  .glow-violet {
-    @apply bg-violet-500 -top-4 -left-2;
-  }
-
-  /* Card body */
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    flex: 1;
-  }
-
+  /* ── Text rows ── */
   .card-title {
-    @apply text-2xl font-semibold mb-2;
+    @apply text-2xl font-semibold pt-4;
+    align-self: start;
   }
-
   .card-date {
-    @apply text-sm opacity-60 mb-3;
+    @apply text-sm opacity-60;
+    align-self: start;
+  }
+  .card-desc {
+    @apply text-sm leading-relaxed opacity-80;
+    align-self: start;
   }
 
-  .card-desc {
-    @apply text-sm leading-relaxed opacity-80 max-w-xs;
+  /* ── Button always at the bottom of its track ── */
+  .card-action {
+    display: flex;
+    justify-content: center;
+    align-self: end;
+    padding-top: 0.5rem;
   }
 </style>
