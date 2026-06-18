@@ -20,6 +20,14 @@
 		isOpen = false;
 	};
 
+	// lazy-load Search component to avoid client bundle cost by default
+	let Search = null;
+	const loadSearch = async () => {
+		if (Search) return;
+		Search = (await import('$lib/components/Search.svelte')).default;
+	};
+
+
 	/** @param {import('@prismicio/client').LinkField} link*/
 	const isActive = (link) => {
 		const path = asLink(link);
@@ -49,6 +57,15 @@
 		</div>
 
 		<!-- Mobile Nav -->
+		<div class="hidden md:flex md:items-center md:ml-6">
+			<button on:mouseenter={loadSearch} class="mr-4">🔎</button>
+			{#if Search}
+				<svelte:component this={Search} />
+			{:else}
+				<!-- hint to load -->
+				<button on:click={loadSearch} class="text-sm opacity-80">Search</button>
+			{/if}
+		</div>
 		<div
 			class={clsx(
 				'fixed inset-0 z-40 flex flex-col items-end bg-gray-950 pr-4 pt-6 transition-transform duration-300 ease-in-out md:hidden',

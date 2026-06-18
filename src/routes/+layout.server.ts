@@ -15,3 +15,5 @@ export async function load({ fetch, cookies }) {
 }
 
 
+// 'entries' moved to +server.ts to satisfy SvelteKit rules
+
