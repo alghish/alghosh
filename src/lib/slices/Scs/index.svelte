@@ -2,7 +2,6 @@
 	import type { Content } from '@prismicio/client';
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 	import Bounded from '$lib/components/Bounded.svelte';
 	import ButtonLink from '$lib/components/ButtonLink.svelte';
@@ -17,43 +16,45 @@
 
 		if (prefersReducedMotion) return;
 
-		gsap.registerPlugin(ScrollTrigger);
+		void import('gsap/dist/ScrollTrigger').then(({ ScrollTrigger }) => {
+			gsap.registerPlugin(ScrollTrigger);
 
-		gsap.fromTo(
-			'.showcase__heading',
-			{
-				y: 100
-			},
-			{
-				y: 0,
-				ease: 'power2.inOut',
-				duration: 1,
-				scrollTrigger: {
-					trigger: '.showcase__heading',
-					start: 'top bottom-=40%',
-					toggleActions: 'play pause resume reverse'
+			gsap.fromTo(
+				'.showcase__heading',
+				{
+					y: 100
+				},
+				{
+					y: 0,
+					ease: 'power2.inOut',
+					duration: 1,
+					scrollTrigger: {
+						trigger: '.showcase__heading',
+						start: 'top bottom-=40%',
+						toggleActions: 'play pause resume reverse'
+					}
 				}
-			}
-		);
+			);
 
-		gsap.fromTo(
-			'.showcase__glow',
-			{
-				scale: 0.7,
-				opacity: 0.1
-			},
-			{
-				scale: 1,
-				opacity: 0.35,
-				ease: 'power2.inOut',
-				duration: 1,
-				scrollTrigger: {
-					trigger: '.showcase__heading',
-					start: 'top bottom-=40%',
-					toggleActions: 'play pause resume reverse'
+			gsap.fromTo(
+				'.showcase__glow',
+				{
+					scale: 0.7,
+					opacity: 0.1
+				},
+				{
+					scale: 1,
+					opacity: 0.35,
+					ease: 'power2.inOut',
+					duration: 1,
+					scrollTrigger: {
+						trigger: '.showcase__heading',
+						start: 'top bottom-=40%',
+						toggleActions: 'play pause resume reverse'
+					}
 				}
-			}
-		);
+			);
+		});
 	});
 </script>
 
