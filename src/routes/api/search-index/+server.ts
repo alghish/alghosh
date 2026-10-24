@@ -1,42 +1,76 @@
 import { createClient } from '$lib/prismicio';
 
+const ignoredFields = new Set([
+	'id',
+	'url',
+	'link_type',
+	'type',
+	'slice_type',
+	'variation',
+	'target',
+	'dimensions',
+	'width',
+	'height',
+	'embed_url'
+]);
+
+function getText(value: unknown): string {
+	if (typeof value === 'string') return value;
+	if (Array.isArray(value)) return value.map(getText).filter(Boolean).join(' ');
+	if (value && typeof value === 'object') {
+		return Object.entries(value)
+			.filter(([key]) => !ignoredFields.has(key))
+			.map(([, nestedValue]) => getText(nestedValue))
+			.filter(Boolean)
+			.join(' ');
+	}
+	return '';
+}
+
+function getFieldText(data: object, field: string): string {
+	return getText(Object.entries(data).find(([key]) => key === field)?.[1]);
+}
+
 export const GET = async ({ fetch, cookies }) => {
 	const client = createClient({ fetch, cookies });
+	const docs = (
+		await Promise.all([client.getAllByType('page'), client.getAllByType('case_study')])
+	).flat();
 
-	const types = ['project', 'case_study', 'page'];
+	const items = docs.flatMap((doc) => {
+		const data = doc.data;
+		const pageTitle =
+			doc.type === 'case_study' ? getFieldText(data, 'heading') : getFieldText(data, 'title');
+		const title = pageTitle || getFieldText(data, 'meta_title') || doc.uid || '';
+		const content = getText(data);
+		const excerptSource =
+			(doc.type === 'case_study' ? getFieldText(data, 'description') : '') ||
+			getFieldText(data, 'meta_description') ||
+			content.replace(title, '').trim();
+		const url =
+			doc.url ||
+			(doc.type === 'page'
+				? doc.uid === 'home'
+					? '/'
+					: `/${doc.uid}`
+				: doc.type === 'case_study'
+					? `/case-study/${doc.uid}`
+					: '');
 
-	// Fetch all documents for each type (may be paginated under the hood)
-	const results = await Promise.all(
-		types.map((t) => (client.getAllByType ? client.getAllByType(t) : client.getAll({ predicates: [] })))
-	);
+		if (!url || !title) return [];
 
-	const docs = results.flat();
-
-	const getText = (field) => {
-		if (!field) return '';
-		if (typeof field === 'string') return field;
-		if (Array.isArray(field)) return field.map((n) => (n?.text ? n.text : (typeof n === 'string' ? n : ''))).join(' ');
-		if (typeof field === 'object' && 'text' in field) return String(field.text || '');
-		return String(field).slice(0, 300);
-	};
-
-	const items = docs.map((doc) => {
-		const data = doc.data || {};
-		const title = getText(data.title) || getText(data.heading) || doc.uid || doc.id || '';
-		let excerpt = '';
-		excerpt = getText(data.excerpt) || getText(data.description) || getText(data.body) || '';
-
-		return {
-			id: doc.id,
-			uid: doc.uid,
-			type: doc.type || doc._meta?.type || '',
-			title: title.slice(0, 200),
-			excerpt: excerpt.slice(0, 500),
-			url: doc.url || `/${doc.type || ''}/${doc.uid || ''}`
-		};
+		return [
+			{
+				id: doc.id,
+				uid: doc.uid,
+				type: doc.type,
+				title: title.slice(0, 200),
+				excerpt: excerptSource.replace(/\s+/g, ' ').slice(0, 280),
+				content,
+				url
+			}
+		];
 	});
 
-	return new Response(JSON.stringify(items), {
-		headers: { 'Content-Type': 'application/json' }
-	});
+	return Response.json(items);
 };

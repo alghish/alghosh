@@ -7,10 +7,13 @@ export default defineConfig({
 	plugins: [
 		sveltekit(),
 		Icons({
-		compiler: 'svelte',
-		autoInstall: true,
-	  })
+			compiler: 'svelte',
+			autoInstall: true
+		})
 	],
+	ssr: {
+		noExternal: ['gsap']
+	},
 	server: {
 		fs: {
 			// Allow access to files from the project root.
